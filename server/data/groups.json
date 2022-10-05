@@ -4,3 +4,4 @@
     {"group":"Dog","rooms":["Apple"],"userList":["test1"]},
     {"group":"Apple","rooms":["Dog"],"userList":["test2"]}
 ]
+

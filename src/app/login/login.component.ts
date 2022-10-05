@@ -75,12 +75,12 @@ export class LoginComponent implements OnInit {
         console.log("Correct Login Information");
         console.log(this.checkUserService.userValue);
         this.getGroup();
-      localStorage.setItem('user', data.username);
-      localStorage.setItem('loggedIn', 'true');
-      localStorage.setItem('role', data.role);
-      console.log(localStorage.getItem('loggedIn'));
-      console.log(localStorage.getItem('user'));
-      console.log(localStorage.getItem('role'));
+        localStorage.setItem('user', data.username);
+        localStorage.setItem('loggedIn', 'true');
+        localStorage.setItem('role', data.role);
+        console.log(localStorage.getItem('loggedIn'));
+        console.log(localStorage.getItem('user'));
+        console.log(localStorage.getItem('role'));
       } else if (data.ok == false) {
         console.log("Incorrect Login Information");
         alert('Incorrect Username and Password Combination');
@@ -88,8 +88,27 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  auth() {
-    this.httpClient.post(BACKEND_URL + '/auth', this.b, httpOptions)
+  auth2() {
+    console.log("AUTH CHECK");
+    this.b = this.checkUserService.getBoth(this.username, this.password);
+    this.httpClient.post(BACKEND_URL + '/auth2', this.b, httpOptions)
+      .subscribe((data:any)=>{
+        console.log(data);
+        if(data.success == true) {
+          console.log("Correct Login Information");
+          console.log(this.checkUserService.userValue);
+          this.getGroup();
+          localStorage.setItem('user', data.username);
+          localStorage.setItem('loggedIn', 'true');
+          localStorage.setItem('role', data.role);
+          console.log(localStorage.getItem('loggedIn'));
+          console.log(localStorage.getItem('user'));
+          console.log(localStorage.getItem('role'));
+        } else {
+          console.log("Incorrect Login Information");
+          alert('Incorrect Username and Password Combination');
+        }
+      });
   }
 
   getGroup() {

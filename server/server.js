@@ -82,18 +82,24 @@ sockets.connect(io, PORT);
 server.listen(http, PORT);
 
 
+const auth2 = require('./router/auth2');
 
-/*
+
+
 const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost:27017';
-MongoClient.connect(url, {poolSize:10}, function(err, client) {
+//MongoClient.connect(url, {poolSize:0}, function(err, client) {
+MongoClient.connect(url, function(err, client) {
     if (err) {return console.log(err)}
     const dbName = 'users';
     const db = client.db(dbName);
-    require('./router/auth');
+    console.log("MONGO WORKING");
+    //require('./router/auth.js')(app, db);
+    app.post('/auth2', require('./router/auth2'));
+
 
 })
-*/
+
 
 app.post('/getUser', require('./router/getUser'));
 app.post('/getGroup', require('./router/getGroup'));
@@ -108,3 +114,5 @@ app.post('/addUserGroup', require('./router/addUserGroup'));
 app.post('/deleteGroup', require('./router/deleteGroup'));
 app.post('/deleteRoom', require('./router/deleteRoom'));
 app.post('/removeUserGroup', require('./router/removeUserGroup'));
+
+//app.post('/auth2', require('./router/auth2'));
