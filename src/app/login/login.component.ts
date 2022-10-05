@@ -99,7 +99,7 @@ export class LoginComponent implements OnInit {
         if(data[0].ok == true) {
           console.log("Correct Login Information");
           console.log(this.checkUserService.userValue);
-          this.getGroup();
+          this.getGroup2();
           localStorage.setItem('user', data[0].username);
           localStorage.setItem('loggedIn', 'true');
           localStorage.setItem('role', data[0].role);
@@ -116,6 +116,15 @@ export class LoginComponent implements OnInit {
   getGroup() {
   this.c = this.getGroupsService.getGroup(this.username);
   this.httpClient.post(BACKEND_URL + '/getGroup', this.c,  httpOptions)
+    .subscribe((data:any)=>{
+      this.getGroupsService.groupList = data;
+      console.log(data);
+    });
+  }
+
+  getGroup2() {
+    this.c = this.getGroupsService.getGroup(this.username);
+    this.httpClient.post(BACKEND_URL + '/getGroup2', this.c,  httpOptions)
     .subscribe((data:any)=>{
       this.getGroupsService.groupList = data;
       console.log(data);
