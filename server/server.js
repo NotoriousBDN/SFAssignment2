@@ -95,7 +95,7 @@ MongoClient.connect(url, function(err, client) {
     const db = client.db(dbName);
     console.log("MONGO WORKING");
     //require('./router/auth.js')(app, db);
-    app.post('/auth2', require('./router/auth2'));
+    app.post('/getUser2', require('./router/getUser2'));
     app.post('/getGroup2', require('./router/getGroup2'));
 
 

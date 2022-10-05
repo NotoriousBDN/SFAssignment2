@@ -88,15 +88,18 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  auth2() {
+  getUser2() {
     console.log("AUTH CHECK");
     this.b = this.checkUserService.getBoth(this.username, this.password);
-    this.httpClient.post(BACKEND_URL + '/auth2', this.b, httpOptions)
+    this.httpClient.post(BACKEND_URL + '/getUser2', this.b, httpOptions)
       .subscribe((data:any)=>{
         this.checkUserService.userValue = (data);
-        console.log(data);
-        console.log(data[0].role);
-        if(data[0].ok == true) {
+        //console.log(data);
+        //console.log(data[0].role);
+        if (data.ok == false) {
+          console.log("Incorrect Login Information");
+          alert('Incorrect Username and Password Combination');
+        } else if(data[0].ok == true) {
           console.log("Correct Login Information");
           console.log(this.checkUserService.userValue);
           this.getGroup2();
