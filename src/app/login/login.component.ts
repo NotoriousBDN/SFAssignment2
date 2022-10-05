@@ -93,14 +93,16 @@ export class LoginComponent implements OnInit {
     this.b = this.checkUserService.getBoth(this.username, this.password);
     this.httpClient.post(BACKEND_URL + '/auth2', this.b, httpOptions)
       .subscribe((data:any)=>{
+        this.checkUserService.userValue = (data);
         console.log(data);
-        if(data.success == true) {
+        console.log(data[0].role);
+        if(data[0].ok == true) {
           console.log("Correct Login Information");
           console.log(this.checkUserService.userValue);
           this.getGroup();
-          localStorage.setItem('user', data.username);
+          localStorage.setItem('user', data[0].username);
           localStorage.setItem('loggedIn', 'true');
-          localStorage.setItem('role', data.role);
+          localStorage.setItem('role', data[0].role);
           console.log(localStorage.getItem('loggedIn'));
           console.log(localStorage.getItem('user'));
           console.log(localStorage.getItem('role'));

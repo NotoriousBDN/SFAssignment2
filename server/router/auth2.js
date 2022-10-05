@@ -46,6 +46,16 @@ module.exports = function(req, res) {
             db.close();
         });
         */
-       dbo.collection("users").find({'username':uname, 'password':pwd})
+       dbo.collection("users").find({'username':uname, 'password':pwd}).toArray(function(err, result) {
+        if (err) throw err;
+        console.log(result);
+        userInfo = result;
+        userInfo[0]["ok"] = true;
+        console.log(userInfo[0].role);
+        console.log(userInfo.ok);
+        console.log(userInfo);
+        res.send(userInfo);
+        db.close();
+        });
     });
 }
