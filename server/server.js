@@ -70,7 +70,6 @@ const io = require('socket.io')(http, {
     }
 });
 
-
 const sockets = require('./socket.js');
 const server = require('./listen.js');
 
@@ -81,6 +80,20 @@ app.use(cors());
 sockets.connect(io, PORT);
 
 server.listen(http, PORT);
+
+
+
+/*
+const MongoClient = require('mongodb').MongoClient;
+const url = 'mongodb://localhost:27017';
+MongoClient.connect(url, {poolSize:10}, function(err, client) {
+    if (err) {return console.log(err)}
+    const dbName = 'users';
+    const db = client.db(dbName);
+    require('./router/auth');
+
+})
+*/
 
 app.post('/getUser', require('./router/getUser'));
 app.post('/getGroup', require('./router/getGroup'));

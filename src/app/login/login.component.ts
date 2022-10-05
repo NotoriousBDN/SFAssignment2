@@ -64,10 +64,6 @@ export class LoginComponent implements OnInit {
   }
 
   getUser() {
-    //this.b = this.checkUserService.getUser(this.username);
-    //console.log(this.password);
-    //this.passwordTest = this.checkUserService.getPassword(this.password);
-    //console.log(this.passwordTest);
     this.b = this.checkUserService.getBoth(this.username, this.password);
     console.log(this.passwordTest);
     this.httpClient.post(BACKEND_URL + '/getUser', this.b,  httpOptions)
@@ -90,8 +86,10 @@ export class LoginComponent implements OnInit {
         alert('Incorrect Username and Password Combination');
       }
     });
-      //this.getGroup();
-    
+  }
+
+  auth() {
+    this.httpClient.post(BACKEND_URL + '/auth', this.b, httpOptions)
   }
 
   getGroup() {
