@@ -78,6 +78,7 @@ export class LoginComponent implements OnInit {
       if (data.ok == true){
         console.log("Correct Login Information");
         console.log(this.checkUserService.userValue);
+        this.getGroup();
       localStorage.setItem('user', data.username);
       localStorage.setItem('loggedIn', 'true');
       localStorage.setItem('role', data.role);
@@ -86,9 +87,11 @@ export class LoginComponent implements OnInit {
       console.log(localStorage.getItem('role'));
       } else if (data.ok == false) {
         console.log("Incorrect Login Information");
+        alert('Incorrect Username and Password Combination');
       }
     });
-    this.getGroup();
+      //this.getGroup();
+    
   }
 
   getGroup() {
