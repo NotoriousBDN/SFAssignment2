@@ -130,7 +130,25 @@ export class AdminComponent implements OnInit {
     console.log(userobj);
     if (Number(localStorage.getItem('role')) > userobj.userrole || Number(localStorage.getItem('role')) == 3) {
       console.log("Works");
-      this.httpClient.post<Userobj[]>(BACKEND_URL + '/createUser', userobj,  httpOptions)
+      this.httpClient.post<Userobj[]>(BACKEND_URL + '/editUser', userobj,  httpOptions)
+      .subscribe((m: any) => {alert(JSON.stringify(m));});
+    } else {
+      alert("You do not have permission to give that role");
+    }
+  }
+
+  editUser2() {
+    let userobj = {
+      'userid': this.userid,
+      'username': this.username, 
+      'useremail': this.useremail, 
+      'userrole': this.userrole,
+      'userpassword': this.userpassword
+    }
+    console.log(userobj);
+    if (Number(localStorage.getItem('role')) > userobj.userrole || Number(localStorage.getItem('role')) == 3) {
+      console.log("Works");
+      this.httpClient.post<Userobj[]>(BACKEND_URL + '/editUser2', userobj,  httpOptions)
       .subscribe((m: any) => {alert(JSON.stringify(m));});
     } else {
       alert("You do not have permission to give that role");
