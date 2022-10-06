@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
     localStorage.clear();
   }
 
+  /*
   getUser() {
     this.b = this.checkUserService.getBoth(this.username, this.password);
     console.log(this.passwordTest);
@@ -87,6 +88,7 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+  */
 
   getUser2() {
     console.log("AUTH CHECK");
@@ -116,6 +118,7 @@ export class LoginComponent implements OnInit {
       });
   }
 
+  /*
   getGroup() {
   this.c = this.getGroupsService.getGroup(this.username);
   this.httpClient.post(BACKEND_URL + '/getGroup', this.c,  httpOptions)
@@ -124,6 +127,7 @@ export class LoginComponent implements OnInit {
       console.log(data);
     });
   }
+  */
 
   getGroup2() {
     this.c = this.getGroupsService.getGroup(this.username);
@@ -134,6 +138,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /*
   getUsers() {
     this.d = this.getUsersService.getUsers(this.username);
     console.log(this.d);
@@ -145,5 +150,6 @@ export class LoginComponent implements OnInit {
       this.getUsersService.userList = data;
     });
   }
+  */
 
 }

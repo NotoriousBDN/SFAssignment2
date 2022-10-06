@@ -22,6 +22,7 @@ export class AdminComponent implements OnInit {
   userid = 0;
   username = "";
   useremail = "";
+  userpassword = "";
   userrole = 0;
   groupname = "";
   roomname = "";
@@ -83,7 +84,8 @@ export class AdminComponent implements OnInit {
       'userid': this.userid,
       'username': this.username, 
       'useremail': this.useremail, 
-      'userrole': this.userrole
+      'userrole': this.userrole,
+      'userpassword' : this.userpassword
     }
     console.log(userobj);
     console.log(userobj.userrole);
@@ -91,7 +93,27 @@ export class AdminComponent implements OnInit {
 
     if (Number(localStorage.getItem('role')) > userobj.userrole || Number(localStorage.getItem('role')) == 3) {
       console.log("Works");
-      this.httpClient.post<Userobj[]>(BACKEND_URL + '/createUser', userobj,  httpOptions)
+      //this.httpClient.post<Userobj[]>(BACKEND_URL + '/createUser', userobj,  httpOptions)
+      //.subscribe((m: any) => {alert(JSON.stringify(m));});
+    } else {
+      alert("You do not have permission to give that role");
+    }
+  }
+
+  createUser2(){
+    let userobj = {
+      'userid': this.userid,
+      'username': this.username, 
+      'useremail': this.useremail, 
+      'userrole': this.userrole,
+      'userpassword' : this.userpassword
+    }
+    console.log(userobj);
+    console.log(userobj.userrole);
+    console.log(Number(localStorage.getItem('role')));
+    if (Number(localStorage.getItem('role')) > userobj.userrole || Number(localStorage.getItem('role')) == 3) {
+      console.log("Works");
+      this.httpClient.post<Userobj[]>(BACKEND_URL + '/createUser2', userobj,  httpOptions)
       .subscribe((m: any) => {alert(JSON.stringify(m));});
     } else {
       alert("You do not have permission to give that role");

@@ -32,7 +32,7 @@ module.exports = function(req, res) {
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("users");
-       dbo.collection("users").find({'username':uname, 'password':pwd}).toArray(function(err, result) {
+        dbo.collection("users").find({'username':uname, 'password':pwd}).toArray(function(err, result) {
         if (err) throw err;
         console.log(result);
         if (result.length != 0) {

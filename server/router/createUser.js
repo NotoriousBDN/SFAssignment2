@@ -7,6 +7,7 @@ module.exports = function(req, res) {
         "email": req.body.useremail,
         "role": req.body.userrole
     }
+    
     console.log(userobj);
     let uArray = [];
     invalidentry=false;
