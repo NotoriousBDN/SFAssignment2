@@ -98,6 +98,7 @@ MongoClient.connect(url, function(err, client) {
     app.post('/getUser2', require('./router/getUser2'));
     app.post('/getGroup2', require('./router/getGroup2'));
     app.post('/createUser2', require('./router/createUser2'));
+    app.post('/deleteUser2', require('./router/deleteUser2'));
 
 
 })
