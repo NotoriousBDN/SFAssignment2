@@ -176,6 +176,13 @@ export class AdminComponent implements OnInit {
       .subscribe((m: any) => {alert(JSON.stringify(m));});
   }
 
+  createGroup2(){
+    let groupname = {'groupname': this.groupname};
+    console.log(groupname);
+    this.httpClient.post<Userobj[]>(BACKEND_URL + '/createGroup2', groupname,  httpOptions)
+      .subscribe((m: any) => {alert(JSON.stringify(m));});
+  }
+
   createRoom() {
     let groupInfo = {
       'groupname': this.groupname,
