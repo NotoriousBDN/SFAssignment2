@@ -230,6 +230,13 @@ export class AdminComponent implements OnInit {
       .subscribe((m: any) => {alert(JSON.stringify(m));});
   }
 
+  deleteGroup2() {
+    let groupname = {'groupname': this.groupname};
+    console.log(groupname);
+    this.httpClient.post<Userobj[]>(BACKEND_URL + '/deleteGroup2', groupname,  httpOptions)
+      .subscribe((m: any) => {alert(JSON.stringify(m));});
+  }
+
   deleteRoom() {
     let groupInfo = {
       'groupname': this.groupname,
