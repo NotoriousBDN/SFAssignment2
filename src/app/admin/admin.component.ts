@@ -247,6 +247,16 @@ export class AdminComponent implements OnInit {
       .subscribe((m: any) => {alert(JSON.stringify(m));});
   }
 
+  deleteRoom2() {
+    let groupInfo = {
+      'groupname': this.groupname,
+      'roomname': this.roomname
+    }
+    console.log(groupInfo);
+    this.httpClient.post<Userobj[]>(BACKEND_URL + '/deleteRoom2', groupInfo,  httpOptions)
+      .subscribe((m: any) => {alert(JSON.stringify(m));});
+  }
+
   removeUserGroup() {
     let groupInfo = {
       'groupname': this.groupname,
@@ -254,6 +264,16 @@ export class AdminComponent implements OnInit {
     }
     console.log(groupInfo);
     this.httpClient.post<Userobj[]>(BACKEND_URL + '/removeUserGroup', groupInfo,  httpOptions)
+      .subscribe((m: any) => {alert(JSON.stringify(m));});
+  }
+
+  removeUserGroup2() {
+    let groupInfo = {
+      'groupname': this.groupname,
+      'user': this.username
+    }
+    console.log(groupInfo);
+    this.httpClient.post<Userobj[]>(BACKEND_URL + '/removeUserGroup2', groupInfo,  httpOptions)
       .subscribe((m: any) => {alert(JSON.stringify(m));});
   }
 
