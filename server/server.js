@@ -104,6 +104,7 @@ MongoClient.connect(url, function(err, client) {
     app.post('/createRoom2', require('./router/createRoom2'));
     app.post('/addUserGroup2', require('./router/addUserGroup2'));
     app.post('/deleteGroup2', require('./router/deleteGroup2'));
+    app.post('/deleteRoom2', require('./router/deleteRoom2'));
 
 
 })
