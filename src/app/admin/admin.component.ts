@@ -213,6 +213,16 @@ export class AdminComponent implements OnInit {
       .subscribe((m: any) => {alert(JSON.stringify(m));});
   }
 
+  addUserGroup2() {
+    let groupInfo = {
+      'groupname': this.groupname,
+      'user': this.username
+    }
+    console.log(groupInfo);
+    this.httpClient.post<Userobj[]>(BACKEND_URL + '/addUserGroup2', groupInfo,  httpOptions)
+      .subscribe((m: any) => {alert(JSON.stringify(m));});
+  }
+
   deleteGroup() {
     let groupname = {'groupname': this.groupname};
     console.log(groupname);
