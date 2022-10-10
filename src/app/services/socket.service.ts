@@ -18,11 +18,18 @@ export class SocketService {
 
   initSocket(){
     this.socket = io(SERVER_URL);
+    //this.socket.emit("test-event", 1);
     //return ()=>{this.socket.disconnect();}
   }
 
-  send(message: string){
-    this.socket.emit('message', message);
+  test(a:string){
+    this.socket.emit("test-event", a);
+  }
+
+  send(message: string, username: string | null){
+    console.log(localStorage.getItem('user'));
+    //this.socket.emit("test-event", 1);
+    this.socket.emit('message', message, username);
   }
 
   getMessage(){

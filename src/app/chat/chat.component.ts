@@ -13,15 +13,21 @@ export class ChatComponent implements OnInit {
   messagecontent:string | null = "";
   messages:string[] = [];
   ioConnection:any;
+  username:string | null = "";
 
-  constructor(private socketservice:SocketService) { }
+  constructor(private socketservice:SocketService) { 
+
+  }
 
   ngOnInit(): void {
     this.initIoConnection();
+    console.log(localStorage.getItem('user'));
+    this.username = localStorage.getItem('user');
   }
 
   private initIoConnection(){
     //this.socketservice.initSocket();
+    this.socketservice.test("User Has Joined the Channel");
     this.ioConnection = this.socketservice.getMessage()
       .subscribe((message:any) => {
         this.messages.push(message);
@@ -31,12 +37,13 @@ export class ChatComponent implements OnInit {
   chat() {
 
     if(this.messagecontent) {
-      this.socketservice.send(this.messagecontent);
+      this.socketservice.send(this.messagecontent, this.username);
       this.messagecontent = null;
     } else {
       console.log("no message");
     }
   }
+
 
   
 
