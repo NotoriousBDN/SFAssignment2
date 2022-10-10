@@ -14,6 +14,8 @@ export class ChatComponent implements OnInit {
   messages:string[] = [];
   ioConnection:any;
   username:string | null = "";
+  roomname:string | null = "";
+  join_room:string[] = [];
 
   constructor(private socketservice:SocketService) { 
 
@@ -25,9 +27,21 @@ export class ChatComponent implements OnInit {
     this.username = localStorage.getItem('user');
   }
 
+  joinRoom() {
+    console.log(this.roomname);
+    this.socketservice.joinRoom(this.roomname, this.username);
+  }
+
   private initIoConnection(){
     //this.socketservice.initSocket();
     this.socketservice.test("User Has Joined the Channel");
+    this.ioConnection = this.socketservice.getJoinRoom()
+      .subscribe((join_room:any) => {
+        console.log('running');
+        console.log(join_room);
+        //this.test.push(test);
+        this.messages.push(join_room)
+      })
     this.ioConnection = this.socketservice.getMessage()
       .subscribe((message:any) => {
         this.messages.push(message);
@@ -37,7 +51,7 @@ export class ChatComponent implements OnInit {
   chat() {
 
     if(this.messagecontent) {
-      this.socketservice.send(this.messagecontent, this.username);
+      this.socketservice.send(this.messagecontent, this.username, this.roomname);
       this.messagecontent = null;
     } else {
       console.log("no message");

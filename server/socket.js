@@ -5,26 +5,24 @@ module.exports = {
         io.on('connection', (socket) => {
             console.log('user connection on port ' + PORT + ' : ' + socket.id);
 
-            socket.on("test-event", (a) => {
-                console.log(a);
+
+            socket.on('joinRoom', (roomname, username, cb) => {
+                socket.join(roomname);
+                join_room = username + ' has joined the room: ' + roomname;
+                console.log(join_room);
+                cb('A user has joined ', roomname);
+                io.emit('join_room', join_room);
             });
 
-            socket.on('message', (message, username) => {
+            socket.on('message', (message, username, roomname) => {
                 message = username + ": " + message;
-                io.emit('message', message);
+                if (roomname == '') {
+                    io.emit('message', message);
+                } else {
+                    io.to(roomname).emit('message', message);
+                }
+              
             });
-        });
-
-        io.on('connect', () => {
-            console.log("User has connected");
-        
-        });
-
-
-
-
-        io.on('user_joins', (data) => {
-            console.log("new user");
         });
 
     }

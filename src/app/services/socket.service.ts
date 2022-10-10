@@ -26,10 +26,27 @@ export class SocketService {
     this.socket.emit("test-event", a);
   }
 
-  send(message: string, username: string | null){
+  joinRoom(roomname: string | null, username: string | null) {
+    console.log(roomname);
+
+    this.socket.emit('joinRoom', roomname, username, (message: any) => {
+      this.getJoinRoom();
+    });
+
+    
+  }
+
+  getJoinRoom() {
+    return new Observable(observer=>{
+      this.socket.on('join_room', (data: any[]) => {observer.next(data)
+      });
+    });
+  }
+
+  send(message: string, username: string | null, room: string | null){
     console.log(localStorage.getItem('user'));
     //this.socket.emit("test-event", 1);
-    this.socket.emit('message', message, username);
+    this.socket.emit('message', message, username, room);
   }
 
   getMessage(){

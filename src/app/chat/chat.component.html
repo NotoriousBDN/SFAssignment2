@@ -4,6 +4,11 @@
     <br>
     <form>
         <div class="form-group">
+            <label>Room: </label>
+            <input type="text" [(ngModel)]="roomname" name="roomname" id="roomname">
+            <button (click)="joinRoom()" id="roomname-button">Join</button>
+            <br>
+            <br>
             <label for="messagecontent">New Message: </label>
             <input type="text" [(ngModel)]="messagecontent" name="messagecontent" id="messagecontent" class="form-control" />
         </div>
