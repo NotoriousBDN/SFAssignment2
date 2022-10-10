@@ -33,18 +33,20 @@ export class ChatComponent implements OnInit {
   }
 
   private initIoConnection(){
-    //this.socketservice.initSocket();
     this.socketservice.test("User Has Joined the Channel");
     this.ioConnection = this.socketservice.getJoinRoom()
       .subscribe((join_room:any) => {
         console.log('running');
         console.log(join_room);
-        //this.test.push(test);
         this.messages.push(join_room)
       })
     this.ioConnection = this.socketservice.getMessage()
       .subscribe((message:any) => {
         this.messages.push(message);
+      })
+    this.ioConnection = this.socketservice.getLeftRoom()
+      .subscribe((leftRoom:any) => {
+        this.messages.push(leftRoom);
       })
   }
 

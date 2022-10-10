@@ -28,12 +28,16 @@ export class SocketService {
 
   joinRoom(roomname: string | null, username: string | null) {
     console.log(roomname);
-
     this.socket.emit('joinRoom', roomname, username, (message: any) => {
       this.getJoinRoom();
     });
+  }
 
-    
+  getLeftRoom() {
+    return new Observable(observer=>{
+      this.socket.on('leftRoom', (data: any[]) => {observer.next(data)
+      });
+    });
   }
 
   getJoinRoom() {
