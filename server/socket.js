@@ -6,12 +6,11 @@ module.exports = {
             console.log('user connection on port ' + PORT + ' : ' + socket.id);
 
 
-            socket.on('joinRoom', (roomname, username, cb) => {
+            socket.on('joinRoom', (roomname, username) => {
                 socket.join(roomname);
                 join_room = username + ' has joined the room: ' + roomname;
                 console.log(join_room);
-                cb('A user has joined ', roomname);
-                io.emit('join_room', join_room);
+                io.to(roomname).emit('join_room', join_room);
             });
 
             socket.on('message', (message, username, roomname) => {
@@ -21,8 +20,13 @@ module.exports = {
                 } else {
                     io.to(roomname).emit('message', message);
                 }
-              
             });
+
+            socket.on('disconnect', () => {
+                console.log("A user left the room");
+                leftRoom = 'A user has left the room';
+                io.emit('leftRoom', leftRoom);
+            })
         });
 
     }
