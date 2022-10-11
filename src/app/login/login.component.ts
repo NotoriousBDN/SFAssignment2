@@ -63,32 +63,6 @@ export class LoginComponent implements OnInit {
     localStorage.clear();
   }
 
-  /*
-  getUser() {
-    this.b = this.checkUserService.getBoth(this.username, this.password);
-    console.log(this.passwordTest);
-    this.httpClient.post(BACKEND_URL + '/getUser', this.b,  httpOptions)
-    .subscribe((data:any)=>{
-      this.checkUserService.userValue = (data);
-      console.log(data);
-      console.log(data.ok);
-      if (data.ok == true){
-        console.log("Correct Login Information");
-        console.log(this.checkUserService.userValue);
-        this.getGroup();
-        localStorage.setItem('user', data.username);
-        localStorage.setItem('loggedIn', 'true');
-        localStorage.setItem('role', data.role);
-        console.log(localStorage.getItem('loggedIn'));
-        console.log(localStorage.getItem('user'));
-        console.log(localStorage.getItem('role'));
-      } else if (data.ok == false) {
-        console.log("Incorrect Login Information");
-        alert('Incorrect Username and Password Combination');
-      }
-    });
-  }
-  */
 
   getUser2() {
     console.log("AUTH CHECK");
@@ -111,6 +85,7 @@ export class LoginComponent implements OnInit {
           console.log(localStorage.getItem('loggedIn'));
           console.log(localStorage.getItem('user'));
           console.log(localStorage.getItem('role'));
+          this.router.navigate(['/chat']);
         } else {
           console.log("Incorrect Login Information");
           alert('Incorrect Username and Password Combination');
@@ -118,16 +93,6 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  /*
-  getGroup() {
-  this.c = this.getGroupsService.getGroup(this.username);
-  this.httpClient.post(BACKEND_URL + '/getGroup', this.c,  httpOptions)
-    .subscribe((data:any)=>{
-      this.getGroupsService.groupList = data;
-      console.log(data);
-    });
-  }
-  */
 
   getGroup2() {
     this.c = this.getGroupsService.getGroup(this.username);
@@ -137,19 +102,5 @@ export class LoginComponent implements OnInit {
       console.log(data);
     });
   }
-
-  /*
-  getUsers() {
-    this.d = this.getUsersService.getUsers(this.username);
-    console.log(this.d);
-    this.httpClient.post(BACKEND_URL + '/getUsers', this.d,  httpOptions)
-    .subscribe((data:any)=>{
-      alert("posting: " +JSON.stringify(this.d));
-      alert("postRes: " +JSON.stringify(data));
-      //alert("postRes: " +JSON.stringify(data));
-      this.getUsersService.userList = data;
-    });
-  }
-  */
 
 }
