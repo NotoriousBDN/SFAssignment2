@@ -1,5 +1,6 @@
 module.exports = {
     getUser2: function(a, b) {
+
         var db = require('mongodb').db;
         var MongoClient = require('mongodb').MongoClient;
         var url = "mongodb://localhost:27017/";

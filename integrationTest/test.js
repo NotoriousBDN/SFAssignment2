@@ -13,6 +13,10 @@ let should = chai.should();
 chai.use(chaiHttp);
 
 const a = require('../server/testingFunctions/getUser2');
+const b = require('../server/testingFunctions/addUserGroup2');
+const c = require('../server/testingFunctions/auth2');
+const d = require('../server/testingFunctions/createGroup2');
+
 
 
 describe('Tests for function one', () => {
@@ -29,9 +33,32 @@ describe('Tests for function one', () => {
 });
 
 describe('Tests for getUser function', () => {
-    describe('Test Case 1 #fnOne()',() => {
+    describe('Test Case 1',() => {
         it('should return false when mongo cannot find matching values', () => {
-            assert.equal(a.getUser2('FakeName', 123), 1);
+            assert.equal(a.getUser2('FakeName', 123), undefined);
         });
     });
 });
+
+
+describe('Tests for addUserGroup function', () => {
+    describe('Test Case 1',() => {
+        it('should return false when mongo cannot find matching values', () => {
+            assert.equal(b.addUserGroup2('Group 1', 'Nick'), undefined);
+        });
+    });
+});
+
+/*
+describe('Tests for auth function', () => {
+    describe('Test Case 1',() => {
+        it('should return false when mongo cannot find matching values', () => {
+            assert.equal(c.auth2('Nick', 123), undefined);
+        });
+    });
+});
+*/
+
+
+
+
