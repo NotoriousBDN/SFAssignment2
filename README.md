@@ -218,26 +218,154 @@ This is functionally the same as the previous task. The only difference is that 
 
 ##### Function	Applies To
 Create a Room
+<br>
 •	Group Assistant
+<br>
 •	Group Admin
+<br>
 •	Super Admin
-Add User to a Group	•	Group Assistant
+<br>
+Add User to a Group
+<br>•	Group Assistant
+<br>
 •	Group Admin
+<br>
 •	Super Admin
-Remove User from a Group	•	Group Assistant
+<br>
+Remove User from a Group
+<br>
+•	Group Assistant
+<br>
 •	Group Admin
+<br>
 •	Super Admin
-Create a User	•	Group Admin
+<br>
+Create a User
+<br>
+•	Group Admin
+<br>
 •	Super Admin
-Create a Group	•	Group Admin
+<br>
+Create a Group
+<br>
+•	Group Admin
+<br>
 •	Super Admin
-Delete a Group	•	Group Admin
+<br>
+Delete a Group
+<br>
+•	Group Admin
+<br>
 •	Super Admin
-Delete a Room	•	Group Admin
+<br>
+Delete a Room
+<br>
+•	Group Admin
+<br>
 •	Super Admin
-Edit a User	•	Super Admin
-Delete a User	•	Super Admin
+<br>
+Edit a User
+<br>
+•	Super Admin
+<br>
+Delete a User
+<br>
+•	Super Admin
 
+#### Chat Component
+
+The chat component uses socket.io to allow users to send messages to one another. The user is provided with two inputs one for the room and another for their message. By entering a message and clicking send the user emits a message that is viewable to other user’s on the website. While joining a room will allow the user to emit a message in a single chat. Other user’s can only view the message by also being the same chat.
+<br>
+Additionally, a message is sent when a user joins a room and when they leave.
+<br>
+A detailed description of how this process work below:
+
+##### Messages
+
+Messages are sent through the send function. It requires the message, username and current room of the user. It will then emit a message to the socket.js file where the username and message are combined to area as an actual message.
+<br>
+For instance:	Nick: Hi
+<br>
+If the message is empty nothing will send a console message will appear explaining that their was no message.
+<br>
+It will then send this back to client in the room specified in the earlier parameter.
+
+
+##### Retrieving Messages
+
+The getMessage function is called to retrieve messages. It is an observable that will retrieve the data as an array. It will push the current message into the array. This allows for the message log to be shown to the user’s. 
+<br>
+On the component a simple *ngFor loop is used to iterate through each element of the array.
+<br>
+
+On the server side there is also a join room and disconnect function.
+<br>
+Disconnect is a socket function that triggers when a user is disconnected, this will send a message alerting that the user has left. This is also sent to the array, resulting it also be shown the message logs.
+<br>
+The joinRoom function sends the name of the room and user who currently joined.
+<br>
+Example: 	Nick has joined the room: General
+<br>
+This is also added to the message array resulting in it being displayed when a user joins a new room.
+
+### Services
+
+#### Check-User Service
+
+Holds the variable to store the user’s name.
+
+#### Get-Groups Service
+
+Holds the variable to store the name of groups and their rooms
+
+#### Get-Users Service
+
+Holds the variable to store the user’s in a group. 
+<br>
+Also stores the variable to see if the user is logged in.
+
+#### Socket Service
+
+A majority of the client side socket code is done through this service, being comprised of numerous functions.
+<br>
+<br>
+Function Name: joinRoom
+<br>
+Parameters: roomname: string | null, username: string | null
+<br>
+Description: Will emit a message to the server that will result in all user’s in a room being notified when a user joins.
+
+<br>
+<br>
+Function Name: getLeftRoom
+<br>
+Parameters: 
+<br>
+Description: Will receive a message from the server when a user has disconnected from socket.io
+<br>
+<br>
+
+Function Name: getJoinRoom
+<br>
+Parameters: roomname: string | null, username: string | null
+<br>
+Description: Will receive a message when the server processes the joinRoom function, resulting in that message being pushed to the messages array.
+<br>
+<br>
+
+Function Name: send
+<br>
+Parameters: message: string, roomname: string | null, username: string | null
+<br>
+Description: Will emit a message to the server that contains the message from the input, the roomname from the input and the current user. This is called by pushing the send message button.
+<br>
+<br>
+
+Function Name: getMessage
+<br>
+Parameters: 
+<br>
+Description: Will retrieve the message sent to the client from the send function and push it to the messages array.
 
 
 
