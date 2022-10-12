@@ -23,10 +23,13 @@ There is no relationship between the two databases.
 
 This are the same methods as part 1 but they have been changed from read and writing to a JSON file to instead use mongoDB.
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### User Authenticate
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Description: Will check if the username exists, if it does they will be logged in.
+Route: getUser
+Method: POST
+Parameters: username: string, password: string
+Return value: if works: {id: number, username: string, email: string, role: number, ok: true}
+If it failed: {“ok”: false}
+Technical Explanation: Route receives both the username and password. Will search the ‘users’ collections for an entry where the username and password match. If it is successful it will return the user’s information along with ‘ok’: true, if not ‘ok’:false.
