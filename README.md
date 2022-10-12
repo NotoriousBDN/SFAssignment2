@@ -61,3 +61,169 @@ It if failed: []
 Technical Explanation: Uses the successfully checked username to see what groups they are in. Will list all groups and their associated rooms that the user is in. This done through the mongoDB find command.
 
 ### Create a User
+
+Description: Will create a user
+<br>
+Route: createUser
+<br>
+Method: POST
+<br>
+Parameters: {username: string, id: number, email: string, role: number, password: string}
+<br>
+Return Value: If it works: {“ok”: true}
+<br>
+If it failed: {“ok”: false}
+<br>
+Technical Explanation: Will create a user with the provided values. Will not work if username or id are already taken, or the role is greater than the user generating the request. Will insert the successfully created user into the ‘users’ collection.
+
+### Update a User
+
+Description: Will delete a user
+<br>
+Route: deleteUser
+<br>
+Method: POST
+<br>
+Parameters: {username: string}
+<br>
+Return Value: If it works: {“ok”: true}
+<br>
+If it failed: {“ok”: false}
+<br>
+Technical Explanation: Will find a user with the same value as the string and using the username as a query delete their entry from the ‘users’ collection.
+
+### Delete a User
+
+Description: Will delete a user
+<br>
+Route: deleteUser
+<br>
+Method: POST
+<br>
+Parameters: {username: string}
+<br>
+Return Value: If it works: {“ok”: true}
+<br>
+If it failed: {“ok”: false}
+<br>
+Technical Explanation: Will find a user with the same value as the string and using the username as a query delete their entry from the ‘users’ collection.
+
+### Create a Group
+
+Description: Creates a new group
+<br>
+Route: createGroup
+<br>
+Method: POST
+<br>
+Parameters: {groupname: string}
+<br>
+Return Value: If it works: {groupname: string}
+<br>
+If it failed: {“ok”: failed}
+<br>
+Technical Explanation: Will check if the group name is taken, if not will insert into the ‘groups’ collections along with an empty array for rooms and userList.
+
+### Create a Room
+Description: Create a new room
+<br>
+Route: createRoom
+<br>
+Method: POST
+<br>
+Parameters: {groupname: string, rommname: string}
+<br>
+Return Value: It worked: {“roomAdded”: true}
+<br>
+If it failed: {“emptyField”: true}
+<br>
+Technical Explanation: Will check if a group exists with that name. Will check that the room name is not already taken. If not will append a new room to the room list for the given group. Will update the rooms value with the new array in the ‘groups’ collection.
+
+### Add a User to Group
+Description: Add a user to a group
+<br>
+Route: addUserGroup
+<br>
+Method: POST
+<br>
+Parameters: {groupname: string, username: string}
+<br>
+Return Value: If it worked: {“userAdded”: true}
+<br>
+If it failed: {“emptyField”: true}
+<br>
+Technical Explanation: Will use the groupname to check if the group exists. If it does it will check the user is not already apart of it, if not will append to the userList. Will update the userList value with the new array in the ‘groups’ collection.
+
+### Delete a Group
+
+Description: Delete a group
+<br>
+Route: deleteGroup
+<br>
+Method: POST
+<br>
+Parameters: {groupname: string}
+<br>
+Return Value: If it works: {“ok”: true}
+<br>
+If it failed: {“ok”: false}
+<br>
+Technical Explanation: Will find a group with the same name as the specified one. Will use a query to delete from the ‘groups’ collection.
+
+### Delete a Room
+
+Description: Delete a room
+<br>
+Route: deleteRoom
+<br>
+Method: POST
+<br>
+Parameters: {groupname: string, roomname: string}
+<br>
+Return Value: If it works: {“ok”: true}
+<br>
+If it failed: {“ok”: false}
+<br>
+Technical Explanation: Will check that both the group and room exist. Will splice the room out of the roomList array. Will then update the entry in the ‘groups’ collection.
+
+### Remove a User from Group
+
+Description: Remove a user from a group
+<br>
+Route: removeUserGroup
+<br>
+Method: POST
+<br>
+Parameters: {groupname: string, username: string}
+<br>
+Return Value: If it works: {“ok”: true}
+<br>
+If it failed: {“ok”: false}
+<br>
+Technical Explanation: Will check to see if group exists and user is a member. Will then splice user from userList array. Will then update the entry in the ‘groups’ collection.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
