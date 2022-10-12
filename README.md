@@ -202,6 +202,44 @@ If it failed: {“ok”: false}
 <br>
 Technical Explanation: Will check to see if group exists and user is a member. Will then splice user from userList array. Will then update the entry in the ‘groups’ collection.
 
+## Angular Architecutre
+
+### Components
+
+#### Login Component
+
+This is the default page when launching the website. All the other pages will redirect the user back to login and ask them to login. The user will have to provide a registered username and password to initially login to the website. This will register the user as ‘loggedIn’, this is a localStorage value that is set to true after a successful login. Each component check for the value of it to see if the user has been authenticated. Upon a successful login the user is redirected to the chat component.
+<br>
+The header has a logout button. Clicking this will redirect the user back to the login page while also clearing the local storage. This is will reset all components back to their initial state of requiring the user to login first.
+
+#### Account Component
+
+This is functionally the same as the previous task. The only difference is that all of the function now use mongoDB instead of JSON. Because of this the layout is identically only the functions have been changed for the backend. Despite this below is a table showcasing which user’s have access to which functions depending on their role.
+
+##### Function	Applies To
+Create a Room
+•	Group Assistant
+•	Group Admin
+•	Super Admin
+Add User to a Group	•	Group Assistant
+•	Group Admin
+•	Super Admin
+Remove User from a Group	•	Group Assistant
+•	Group Admin
+•	Super Admin
+Create a User	•	Group Admin
+•	Super Admin
+Create a Group	•	Group Admin
+•	Super Admin
+Delete a Group	•	Group Admin
+•	Super Admin
+Delete a Room	•	Group Admin
+•	Super Admin
+Edit a User	•	Super Admin
+Delete a User	•	Super Admin
+
+
+
 
 
 
