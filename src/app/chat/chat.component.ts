@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {SocketService} from '../services/socket.service';
 import { FormsModule } from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-chat',
@@ -17,11 +18,24 @@ export class ChatComponent implements OnInit {
   roomname:string | null = "";
   join_room:string[] = [];
 
-  constructor(private socketservice:SocketService) { 
+  constructor(
+    private socketservice:SocketService,
+    private router: Router
+    ) { 
 
   }
 
+  loggedOut = true;
+
   ngOnInit(): void {
+    if (localStorage.getItem('loggedIn') == 'true') {
+      this.loggedOut = false;
+      console.log("Logged In");
+    } else {
+      this.loggedOut = true;
+      alert("Please Login");
+      this.router.navigateByUrl("/login");
+    }
     this.initIoConnection();
     console.log(localStorage.getItem('user'));
     this.username = localStorage.getItem('user');
@@ -33,7 +47,6 @@ export class ChatComponent implements OnInit {
   }
 
   private initIoConnection(){
-    this.socketservice.test("User Has Joined the Channel");
     this.ioConnection = this.socketservice.getJoinRoom()
       .subscribe((join_room:any) => {
         console.log('running');

@@ -22,9 +22,7 @@ export class SocketService {
     //return ()=>{this.socket.disconnect();}
   }
 
-  test(a:string){
-    this.socket.emit("test-event", a);
-  }
+
 
   joinRoom(roomname: string | null, username: string | null) {
     console.log(roomname);
@@ -48,7 +46,7 @@ export class SocketService {
   }
 
   send(message: string, username: string | null, room: string | null){
-    console.log(localStorage.getItem('user'));
+    //console.log(localStorage.getItem('user'));
     //this.socket.emit("test-event", 1);
     this.socket.emit('message', message, username, room);
   }

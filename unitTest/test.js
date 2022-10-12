@@ -1,3 +1,6 @@
+
+//NODE.JS DEFAULT ASSERT LIBRARY
+
 var assert = require('assert'); //link in assertion library
 
 describe('Tests for function one', () => {
