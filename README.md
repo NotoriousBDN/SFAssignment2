@@ -14,6 +14,7 @@ During the development after every function or quality of life improvement was s
 ## Data Structures
 
 Initially I had two JSON files from the first part of the assignment. I used the same schema they used but add them to two different databases using mongoDB. Because of this all previous functions that used JSON have been rewritten to now use mongoDB. 
+<br>
 It was setup as a database called ‘users’: this contains two collections, ‘users’ and ‘groups’.
 The ‘users’ collection contains a user’s id, username, email role and password. Unlike the previous assignment, I included a password as user authentication is one of the requirements for the task.
 The ‘groups’ collection contains the group name, an array of all rooms and an array of all users.
