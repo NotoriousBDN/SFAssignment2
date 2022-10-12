@@ -12,6 +12,8 @@ const { Http2ServerRequest } = require('http2');
 let should = chai.should();
 chai.use(chaiHttp);
 
+const a = require('../server/testingFunctions/getUser2');
+
 
 describe('Tests for function one', () => {
     describe('Test Case 1 #fnOne()',() => {
@@ -26,43 +28,10 @@ describe('Tests for function one', () => {
     });
 });
 
-describe('Server Test', function () {
-
-    before(function() {
-        console.log("before test");
-    });
-   
-    after(function() {
-        console.log("after test");
-    });
-
-    /*
-    describe('/getUser2', () => {
-        it('should serve on route /getUser2', function() {
-            http.get('http://localhost:4200/getUser2', function(response) {
-                assert.equal(response.statusCode, 200);
-
-                var body = '';
-                response.on('data', function(d) {body += d;});
-                response.on('end', function() {
-                    assert.equal(body, 'Hello Mocha');
-                });
-            });
+describe('Tests for getUser function', () => {
+    describe('Test Case 1 #fnOne()',() => {
+        it('should return false when mongo cannot find matching values', () => {
+            assert.equal(a.getUser2('FakeName', 123), 1);
         });
     });
-    */
-    
-    
-    describe('/getUser2', () => {
-        it('should serve on route /getUser2', (done) => {
-            chai.request(app).post('/getUser2').type('form');
-                .send({'username': 'Super', 'password': '123'})
-                    .end((err, res) => {
-                        res.should.have.status(200);
-                        console.log(res.body);
-                        done();
-                    });
-        });
-    });
-    
 });
