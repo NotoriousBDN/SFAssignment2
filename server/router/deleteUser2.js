@@ -1,4 +1,5 @@
 module.exports = function(req, res) {
+    //Retrieves username
     let u = {"username": req.body.username};
     let y = u.username;
     console.log("DELETE USER RUNNING");
@@ -6,9 +7,11 @@ module.exports = function(req, res) {
     console.log("username: ", y);
     nametaken = false;
 
+    //Connects to mongoDB
     var MongoClient = require('mongodb').MongoClient;
     var url = "mongodb://localhost:27017/";
 
+    //Deletes user from users collection with selected name
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("users");

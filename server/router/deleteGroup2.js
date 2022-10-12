@@ -2,6 +2,7 @@ module.exports = function(req, res) {
     console.log("RUNNING DELETE GROUP 2");
     console.log("###############################################################################");
     console.log("check");
+    //Retrieves group name
     let u = {"groupname": req.body.groupname};
     console.log(u);
     let y = u.groupname;
@@ -12,6 +13,7 @@ module.exports = function(req, res) {
     var MongoClient = require('mongodb').MongoClient;
     var url = "mongodb://localhost:27017/";
 
+    //Checks if groupname is blank
     if (u == {"groupname": ""}) {
         invalidname = true;
         console.log("Empty");
@@ -19,6 +21,7 @@ module.exports = function(req, res) {
             "invalidname": true
         });
     } else {
+        //Deletes group from groups collection with corresponding name
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
             var dbo = db.db("users");

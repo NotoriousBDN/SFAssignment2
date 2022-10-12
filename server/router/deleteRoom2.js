@@ -1,6 +1,7 @@
 module.exports = function(req, res) {
     console.log("RUNNING DELETE ROOM 2");
     console.log("##################################################################");
+    //Retrieves group name and room name
     let groupInfo = {
         "group": req.body.groupname,
         "room": req.body.roomname,
@@ -14,12 +15,14 @@ module.exports = function(req, res) {
     var MongoClient = require('mongodb').MongoClient;
     var url = "mongodb://localhost:27017/";
 
+    //Checks if values are blank
     if (a === "" || b === "") {
         console.log("Is Null");
         res.send({
             "emptyfield" : true
         });
     } else {
+        //Check if the group and room names exist
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
             var dbo = db.db("users");
@@ -48,16 +51,18 @@ module.exports = function(req, res) {
                 });
             }, 500);
         });
+            //Validates
             setTimeout(() => {
                 if (nametaken == false) {
                     console.log("Group Name Does Not Exist")
                 } else if (roomNameTaken == false) {
                     console.log("Room Name Does Not Exist");
                 } else if (roomNameTaken == true || nametaken == true) {
-                    //console.log(result[0].rooms);
+                    //Remove room from rooms
                     console.log("NEW CODE");
                     queryResult[0].rooms.splice(indexVal, 1);
                     console.log(queryResult[0]);
+                    //Insert updates room list into groups collection
                     MongoClient.connect(url, function(err, db) {
                         if (err) throw err;
                         var dbo = db.db("users");

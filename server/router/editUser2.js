@@ -1,5 +1,6 @@
 module.exports = function(req, res) {
 
+    //Retrieves user info
     let userobj = {
         "id": req.body.userid,
         "username": req.body.username,
@@ -20,6 +21,7 @@ module.exports = function(req, res) {
     var MongoClient = require('mongodb').MongoClient;
     var url = "mongodb://localhost:27017/";
 
+    //Validation for blanks
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("users");
@@ -49,6 +51,7 @@ module.exports = function(req, res) {
             console.log("ALL VALUES WERE FILLED");
             var newvalues = { $set: { username: userobj.username, email: userobj.email, role: userobj.role } };
         }
+        //Updates users collection with new user info
         setTimeout(() => {
             dbo.collection("users").updateOne(myquery, newvalues, function(err, res) {
                 if (err) throw err;

@@ -1,6 +1,7 @@
 module.exports = function(req, res) {
     console.log("RUNNING CREATE GROUP 2");
     console.log("##################################################################");
+    //Retrieves the groupname
     let u = {"groupname": req.body.groupname};
     console.log(u);
     let y = u.groupname;
@@ -11,6 +12,7 @@ module.exports = function(req, res) {
     var MongoClient = require('mongodb').MongoClient;
     var url = "mongodb://localhost:27017/";
 
+    //Check if the groupname is blank
     if (y.length == 0) {
         invalidname = true;
         console.log("Empty");
@@ -18,6 +20,7 @@ module.exports = function(req, res) {
             "invalidname": true
         });
     } else {
+        //Checks groups collection for any entries where the group name is found
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
             var dbo = db.db("users");
@@ -33,6 +36,7 @@ module.exports = function(req, res) {
                 });
             }, 500);
         });
+        //Validation if group already exists
         setTimeout(()=>{
             console.log("GROUP NAME TAKEN: ", nametaken);
             if (nametaken == true) {
@@ -40,6 +44,7 @@ module.exports = function(req, res) {
                     "nametaken": true
                 });
             } else {
+                //Inserts a new entry with the groupname
                 MongoClient.connect(url, function(err, db) {
                     if (err) throw err;
                     var dbo = db.db("users");

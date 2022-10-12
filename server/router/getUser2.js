@@ -6,11 +6,13 @@ module.exports = function(req, res) {
     console.log("STARTING getUser");
     console.log("#######################################################");
 
+    //Retrives username and password
     var uname = req.body.username.toString();
     console.log(uname);
     var pwd = req.body.password.toString();
     console.log(pwd);
 
+    //Checks users collection for matching results
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("users");

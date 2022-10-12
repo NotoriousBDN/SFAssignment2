@@ -64,28 +64,32 @@ export class LoginComponent implements OnInit {
   }
 
 
+  //Runs this function when button is pushed
   getUser2() {
     console.log("AUTH CHECK");
     this.b = this.checkUserService.getBoth(this.username, this.password);
+    console.log(this.b);
     this.httpClient.post(BACKEND_URL + '/getUser2', this.b, httpOptions)
       .subscribe((data:any)=>{
         this.checkUserService.userValue = (data);
-        //console.log(data);
-        //console.log(data[0].role);
         if (data.ok == false) {
           console.log("Incorrect Login Information");
           alert('Incorrect Username and Password Combination');
         } else if(data[0].ok == true) {
           console.log("Correct Login Information");
           console.log(this.checkUserService.userValue);
-          this.getGroup2();
-          localStorage.setItem('user', data[0].username);
-          localStorage.setItem('loggedIn', 'true');
-          localStorage.setItem('role', data[0].role);
-          console.log(localStorage.getItem('loggedIn'));
-          console.log(localStorage.getItem('user'));
-          console.log(localStorage.getItem('role'));
-          this.router.navigate(['/chat']);
+          setTimeout(() => {
+            this.getGroup2();
+          }, 500);
+          setTimeout(() => {
+            localStorage.setItem('user', data[0].username);
+            localStorage.setItem('loggedIn', 'true');
+            localStorage.setItem('role', data[0].role);
+            console.log(localStorage.getItem('loggedIn'));
+            console.log(localStorage.getItem('user'));
+            console.log(localStorage.getItem('role'));
+            this.router.navigate(['/chat']);
+          }, 1000);
         } else {
           console.log("Incorrect Login Information");
           alert('Incorrect Username and Password Combination');
@@ -93,13 +97,14 @@ export class LoginComponent implements OnInit {
       });
   }
 
-
   getGroup2() {
     this.c = this.getGroupsService.getGroup(this.username);
     this.httpClient.post(BACKEND_URL + '/getGroup2', this.c,  httpOptions)
     .subscribe((data:any)=>{
       this.getGroupsService.groupList = data;
       console.log(data);
+      console.log(data[0]);
+      console.log(this.getGroupsService.groupList);
     });
   }
 

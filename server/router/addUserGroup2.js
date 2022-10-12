@@ -1,6 +1,7 @@
 module.exports = function(req, res) {
     console.log("RUNNING ADD USER 2");
     console.log("##################################################################");
+    //Retrieves the name of the group and the user
     let groupInfo = {
         "group": req.body.groupname,
         "user": req.body.user,
@@ -11,15 +12,20 @@ module.exports = function(req, res) {
     userTaken = false;
     nametaken = false;
 
+    
+    //Connects to mongoDB
     var MongoClient = require('mongodb').MongoClient;
     var url = "mongodb://localhost:27017/";
 
+    //Validation if either are blank
     if (a === "" || b === "") {
         console.log("Is Null");
         res.send({
             "emptyfield" : true
         }); 
     } else {
+        //Check the groups collection for any group with the same name
+        //Will also check if the user is already in the group
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
             var dbo = db.db("users");
@@ -46,6 +52,8 @@ module.exports = function(req, res) {
                 });
             }, 500);
         });
+        //Will check if any of the error were fulfilled
+        //Otherwise will add the user to the userlist and update the db
             setTimeout(() => {
                 if (nametaken == false) {
                     console.log("Group Name Does Not Exist")
@@ -65,7 +73,7 @@ module.exports = function(req, res) {
                             dbo.collection("groups").updateOne(myquery, newvalues, function(err, res) {
                                 if (err) throw err;
                                 console.log("User Added");
-                                db.close();
+                                db.close();   
                             });
                         }, 1000);
                     });

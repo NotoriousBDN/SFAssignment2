@@ -41,7 +41,7 @@ MongoClient.connect(url, function(err, client) {
     const dbName = 'users';
     const db = client.db(dbName);
     console.log("MONGO WORKING");
-    //require('./router/auth.js')(app, db);
+    //All routes being called
     app.post('/getUser2', require('./router/getUser2'));
     app.post('/getGroup2', require('./router/getGroup2'));
     app.post('/createUser2', require('./router/createUser2'));
@@ -56,20 +56,3 @@ MongoClient.connect(url, function(err, client) {
 
 
 })
-
-
-app.post('/getUser', require('./router/getUser'));
-app.post('/getGroup', require('./router/getGroup'));
-app.post('/getRooms', require('./router/getRooms'));
-app.post('/getUsers', require('./router/getUsers'));
-app.post('/createUser', require('./router/createUser'));
-app.post('/editUser', require('./router/editUser'));
-app.post('/deleteUser', require('./router/deleteUser'));
-app.post('/createGroup', require('./router/createGroup'));
-app.post('/createRoom', require('./router/createRoom'));
-app.post('/addUserGroup', require('./router/addUserGroup'));
-app.post('/deleteGroup', require('./router/deleteGroup'));
-app.post('/deleteRoom', require('./router/deleteRoom'));
-app.post('/removeUserGroup', require('./router/removeUserGroup'));
-
-//app.post('/auth2', require('./router/auth2'));

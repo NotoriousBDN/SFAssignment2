@@ -1,6 +1,7 @@
 module.exports = function(req, res) {
     console.log("RUNNING DELETE ROOM 2");
     console.log("##################################################################");
+    //Retrieves group name and user name
     let groupInfo = {
         "group": req.body.groupname,
         "user": req.body.user,
@@ -14,6 +15,7 @@ module.exports = function(req, res) {
     var MongoClient = require('mongodb').MongoClient;
     var url = "mongodb://localhost:27017/";
 
+    //Checks empty strings
     if (a === "" || b === "") {
         console.log("Is Null");
         res.send({
@@ -24,6 +26,7 @@ module.exports = function(req, res) {
             if (err) throw err;
             var dbo = db.db("users");
             setTimeout(() => {
+                //Checks groups collection if group name exists
                 dbo.collection("groups").find({'group':a}).toArray(function(err, result) {
                     setTimeout(() => {
                         queryResult = result;
@@ -32,6 +35,7 @@ module.exports = function(req, res) {
                         console.log("Found Group");
                         console.log(result);
                         console.log(result[0]['userList']);
+                        //Checks if user is apart of group
                         for (let i=0; i < result[0].userList.length; i++) {
                             if (result[0].userList[i] == b) {
                                 userTaken = true;
@@ -48,6 +52,7 @@ module.exports = function(req, res) {
                 });
             }, 500);
         });
+            //Validation
             setTimeout(() => {
                 if (nametaken == false) {
                     console.log("Group Name Does Not Exist")
@@ -59,6 +64,7 @@ module.exports = function(req, res) {
                     queryResult[0].userList.splice(indexVal, 1);
                     console.log(queryResult[0]);
                     MongoClient.connect(url, function(err, db) {
+                        //Updates userList after removing the selected user
                         if (err) throw err;
                         var dbo = db.db("users");
                         myquery = { group: a};
